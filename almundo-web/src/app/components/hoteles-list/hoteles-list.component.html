@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-4" style="text-align: center">
+                <div style="width: 100%">
+                    <img class="img img-responsive object-responsive" src="./assets/images/hotels/{{hotel.image}}">
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <h3 class="color-title">{{hotel.name}}</h3>
+                <p>
+                    <span *ngFor="let item of getStarts(hotel.stars)">
+            <img class="icono-star" src="{{item}}" />
+          </span>
+                </p>
+                <p>
+                    <span *ngFor="let icono of hotel.amenities">
+            <img class="icono-amenities" src="./assets/icons/amenities/{{icono}}.svg" />
+          </span>
+                </p>
+            </div>
+            <div class="col-sm-3 detail" style="text-align: center">
+                <p class="etiqueta">
+                    {{etiqueta}}
+                </p>
+                <p>
+                    <span class="moneda">{{moneda}}</span>
+                    <span class="price">{{hotel.price}}</span>
+                </p>
+                <p>
+                    <button class="btn btn-lg btn-block boton">{{boton}}</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

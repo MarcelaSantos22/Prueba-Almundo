@@ -1,0 +1,69 @@
+.color-title {
+    color: #007BB0;
+    font-size: 20px;
+    margin: 0;
+}
+
+.object-responsive {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+}
+
+.icono-star {
+    color: #D4C03E;
+    margin: 0;
+    display: inline-block;
+    height: 18px;
+    float: none;
+}
+
+.icono-amenities {
+    color: black;
+    margin: 0;
+    display: inline-block;
+    height: 18px;
+    float: none;
+    margin: 0 3px;
+}
+
+.detail {
+    padding: 25px 25px;
+    border-left: 1px #c5c4c4 dashed;
+    .moneda {
+        color: #ED8216;
+        font-size: large;
+        text-align: center;
+    }
+    .price {
+        color: #EB6701;
+        font-size: xx-large;
+        font-weight: bold;
+        text-align: center;
+    }
+    .etiqueta {
+        color: #444;
+        text-align: center;
+    }
+    .boton {
+        color: white;
+        text-align: center;
+        background: #002B76;
+        box-shadow: 0 3px black;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 5px 10px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .detail {
+        border-left: 0;
+        border-top: 1px #c5c4c4 dashed;
+        margin: 0 15px;
+        padding: 25px 0;
+    }
+    .color-title {
+        margin-top: 15px;
+    }
+}
