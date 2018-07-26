@@ -1,13 +1,11 @@
+.img-container {
+    height: 250px;
+}
+
 .color-title {
     color: #007BB0;
     font-size: 20px;
     margin: 0;
-}
-
-.object-responsive {
-    max-width: 100%;
-    height: auto;
-    width: 100%;
 }
 
 .icono-star {
@@ -49,7 +47,7 @@
         color: white;
         text-align: center;
         background: #002B76;
-        box-shadow: 0 3px black;
+        box-shadow: 2px 3px 3px #929191;
         font-weight: bold;
         font-size: 20px;
         padding: 5px 10px;

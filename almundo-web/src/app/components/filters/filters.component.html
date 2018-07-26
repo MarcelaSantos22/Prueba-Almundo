@@ -1,27 +1,31 @@
 <div class="row">
     <div class="col-md-3 accordion-filters" id="accordion">
         <div class="card">
-            <div class="card-header" id="headingOne">
+            <div class="card-header" id="headingOne" (click)="toggle()">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <span class="filter">{{filtros}}</span></button>
+                    <div class="head">
+                        <span class="filter">{{filtrosLabel}}</span>
+                        <span *ngIf="show" class="icon-triangle-up"></span>
+                        <span *ngIf="!show" class="icon-triangle-down"></span>
+                    </div>
                 </h5>
             </div>
 
-            <div id="collapseOne" aria-labelledby="headingOne" data-parent="#ac1">
+            <div id="collapseOne" aria-labelledby="headingOne" data-parent="#ac1" *ngIf="show">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm">
                             <div class="search-label">
-                                <img class="icono-star" src="{{iconoSearch}}" /> {{nombreHotel}}
+                                <img class="icono-star" src="{{iconoSearch}}" /> {{nombreHotelLabel}}
+                                <i class="fa fa-caret-up" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div class="col-sm search">
                             <form class="form-inline">
                                 <div class="form-group col-sm-8 ">
-                                    <input type="text" class="form-control object-responsive" ctrl="ngModel" placeholder="Ingrese el nombre del hotel">
+                                    <input [(ngModel)]="searchName" name="searchName" type="text" class="form-control object-responsive" ctrl="ngModel" placeholder="Ingrese el nombre del hotel">
                                 </div>
-                                <button class="btn btn-primary col-sm-4 color-title">{{aceptar}}</button>
+                                <button class="btn btn-primary col-sm-4 color-title" (click)="getHoteles()">{{aceptar}}</button>
                             </form>
                         </div>
                     </div>
@@ -33,12 +37,12 @@
                         </div>
                         <div class="col-sm">
                             <div class="form-check" *ngFor="let item of estrellas">
-                                <input type="checkbox" class="form-check-input" [value]="item.value" type="checkbox" id="{{item.id}}">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" (change)="getByStars(item.stars,item.value)" [value]="item.value" type="checkbox" id="{{item.id}}">
                                 <label class="form-check-label" for="{{item.id}}">
-                            <span [hidden]="!item.isNumber" *ngFor="let star of getStarts(item.stars)">
-                              <img class="icono-star" src="{{star}}" />
-                            </span>
-                            <span [hidden]="item.isNumber">{{item.stars}}</span>
+                                  <span [hidden]="item.stars === -1" *ngFor="let star of getStarts(item.stars)">
+                                    <img class="icono-star" src="{{star}}" />
+                                  </span>
+                                  <span [hidden]="item.stars !== -1">{{allStars}}</span>
                           </label>
                             </div>
                         </div>
@@ -50,10 +54,11 @@
 
     <div class="col-md-9 container-hoteles">
         <div *ngIf="!hoteles">Cargando hoteles...</div>
-        <div *ngIf="hoteles">
-            <div *ngFor="let hotel of hoteles">
-                <app-hoteles-list [hotel]='hotel'></app-hoteles-list>
-            </div>
+        <div *ngIf="error">
+            {{error}}
+        </div>
+        <div *ngFor="let hotel of hoteles">
+            <app-hoteles-list [hotel]='hotel'></app-hoteles-list>
         </div>
     </div>
 </div>

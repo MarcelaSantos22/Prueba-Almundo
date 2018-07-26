@@ -8,82 +8,79 @@ import { Config } from '../../models/config';
   templateUrl: 'filters.component.html',
   styleUrls: ['./filters.component.scss'],
   providers: [HotelesService]
-
 })
-
-export class FiltersComponent  {
-  public filtroExtrella = false;
-  public filtros: String;
-  public nombreHotel: String;
+export class FiltersComponent {
+  public filtrosLabel: String;
+  public nombreHotelLabel: String;
   public estrellaLabel: String;
   public aceptar: String;
-  public all: String;
+  public allStars: String;
   public iconoStar: String;
   public iconoSearch: String;
+  public searchName: string;
+  public error: string;
+  public show: boolean;
   public estrellas: any;
   public hoteles: any;
-
+  public filtroStars: any;
 
   constructor(private _hotelService: HotelesService) {
-  this.iconoStar = Config.ICONO_STAR;
-  this.iconoSearch = Config.ICONO_SEARCH;
-  this.filtros = 'Filtros';
-  this.nombreHotel = 'Nombre del hotel';
-  this.estrellaLabel = 'Estrellas';
-  this.aceptar = 'Aceptar';
-  this.all = 'Todas las estrellas';
-  this.estrellas = [
-    {
-      id: 'e0',
-      value: true,
-      stars: -1,
-      isNumber: false,
-    },
-    {
-      id: 'e1',
-      value: false,
-      stars: 5,
-      isNumber: true
-    },
-    {
-      id: 'e2',
-      value: false,
-      stars: 4,
-      isNumber: true
-    },
-    {
-      id: 'e3',
-      value: false,
-      stars: 3,
-      isNumber: true
-    },
-    {
-      id: 'e4',
-      value: false,
-      stars: 2,
-      isNumber: true
-    },
-    {
-      id: 'e5',
-      value: false,
-      stars: 1,
-      isNumber: true
-    }
-  ];
-}
+    this.iconoStar = Config.ICONO_STAR;
+    this.iconoSearch = Config.ICONO_SEARCH;
+    this.filtrosLabel = 'Filtros';
+    this.nombreHotelLabel = 'Nombre del hotel';
+    this.estrellaLabel = 'Estrellas';
+    this.aceptar = 'Aceptar';
+    this.allStars = 'Todas las estrellas';
+    this.searchName = '';
+    this.error = '';
+    this.show = false;
+    this.filtroStars = [];
+    this.estrellas = [
+      {
+        id: 'e0',
+        value: true,
+        stars: -1
+      },
+      {
+        id: 'e5',
+        value: false,
+        stars: 5
+      },
+      {
+        id: 'e4',
+        value: false,
+        stars: 4
+      },
+      {
+        id: 'e3',
+        value: false,
+        stars: 3
+      },
+      {
+        id: 'e2',
+        value: false,
+        stars: 2
+      },
+      {
+        id: 'e1',
+        value: false,
+        stars: 1
+      }
+    ];
+  }
 
-  // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
     this.getHoteles();
   }
 
-  getHoteles() {
-    this._hotelService.getHoteles().subscribe(
+  public getHoteles() {
+    this._hotelService.getHoteles(this.searchName, this.filtroStars).subscribe(
       result => {
-        console.log(result);
         this.hoteles = result;
       },
       error => {
+        this.error = 'No se obtuvieron resultados.';
         alert(JSON.stringify(error));
       }
     );
@@ -99,6 +96,27 @@ export class FiltersComponent  {
     } else {
       return numero;
     }
+  }
 
+  public getByStars(stars: any, value: boolean) {
+    if (value) {
+      if (stars !== -1) {
+        this.estrellas[0].value = false;
+      } else {
+        for (let i = 1; i < this.estrellas.length; i++) {
+          this.estrellas[i].value = false;
+        }
+        this.filtroStars = [];
+      }
+      this.filtroStars.push(stars);
+    } else {
+      let index = this.filtroStars.indexOf(stars);
+      this.filtroStars.splice(index, 1);
+    }
+    this.getHoteles();
+  }
+
+  public toggle() {
+    this.show = !this.show;
   }
 }
