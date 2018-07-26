@@ -3,10 +3,12 @@ Prueba Técnica
 
 ## Getting Started
 
-Entrar a las carpetas
+Primero: Servidor
+
+Entrar a la carpeta
 
 ```bash
-$ cd almundo-web , cd almundo-back
+$ cd almundo-back
 ```
 
 Instalar npm devDependencies
@@ -15,15 +17,28 @@ Instalar npm devDependencies
 $ npm install
 ```
 
-Correr la aplicacion web
+Correr el servidor en el back
+```bash
+$ npm run start
+```
 
+Segundo: Aplicacion web
+
+Entrar a la carpeta
+
+```bash
+$ cd almundo-web
+```
+
+Instalar npm devDependencies
+
+```bash
+$ npm install
+```
+
+Correr aplicación
 ```bash
 $ npm start
 ```
 
-Correr el servidor en el back
-
-```bash
-$ npm run start
-```
 

@@ -23,7 +23,8 @@ module.exports = function(app, db) {
         } else if (stars) {
             filtro = hoteles.getByStars(stars, data);
         }
-
+        resp.header("Access-Control-Allow-Origin", "*");
+        resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         resp.send(filtro);
 
     });
