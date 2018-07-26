@@ -1,14 +1,21 @@
 {
-  "name": "prueba-almundo",
-  "version": "1.0.0",
-  "description": "Prueba front-end para Almundo.com",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Yuri Marcela Quejada",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.3"
-  }
+    "name": "prueba-almundo",
+    "version": "1.0.0",
+    "description": "Prueba front-end para Almundo.com",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "author": "Yuri Marcela Quejada",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.17.1",
+        "express": "^4.15.2",
+        "morgan": "^1.8.1",
+        "winston": "^2.3.1"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.3"
+    }
 }
